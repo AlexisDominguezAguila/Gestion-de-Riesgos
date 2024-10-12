@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/ModelosAmenazas.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="ventana" id="vent">
+
+        <div class="modal" id="Formodal">
+            <div class="form">
+                <h2> Añadir Nueva Amenaza</h2>
+                <div class="campos">
+                    <label for="amenaza">Amenaza</label>
+                    <input type="text" id="amenaza" placeholder="Nombre de la amenaza">
+                </div>
+                <div class="cont-campos">
+                    <div class="campos">
+                        <label for="aparicion">Probabilidad Aparición</label>
+                        <select id="aparicion">
+                            <option value="1">Muy bajo</option>
+                            <option value="2">Bajo</option>
+                            <option value="3">Medio</option>
+                            <option value="4">Alto</option>
+                            <option value="5">Muy Alto</option>
+                        </select>
+                    </div>
+                    
+                    <div class="campos">
+                        <label for="impacto">Probabilidad de Impacto</label>
+                        <select id="impacto">
+                            <option value="1">Muy bajo</option>
+                            <option value="2">Bajo</option>
+                            <option value="3">Medio</option>
+                            <option value="4">Alto</option>
+                            <option value="5">Muy Alto</option>
+                        </select>
+                    </div>
+                </div>
+                
+                
+                <div class="campos">
+                    <label for="descripcion">Descripción de Amenaza</label>
+                    <input type="text" id="descripcion" placeholder="Describe la amenaza">
+                </div>
+                
+                <div class="campos">
+                    <label for="acciones">Acciones preventivas</label>
+                    <input type="text" id="acciones" placeholder="Acciones preventivas">
+                </div>
+                
+                <div class="botones">
+                    <button class="btn-aceptar" onclick="nuevoRiesgo()">Aceptar</button>
+                    <button class="btn-cancelar" onclick="cerrar()">Cancelar</button>
+                </div>
+            </div>
+            
+              </div>
+
+    </div>
+    <div class="inicio">
+        <a href="../../index.html">Inicio</a>
+    </div>
+    
+    <div class="titulo">
+        <h1>Modelado de Amenazas</h1>
+    </div>
+    <div class="botonNuevo">
+        <button class="button" onclick="abrir()">Nueva Amenaza</button>
+    </div>
+
+    <div class="cont-amenazas">
+        <div class="table-container">
+            <table id="tablaAmenazas">
+                <thead>
+                    <tr>
+                        <th>Amenaza</th>
+                        <th>Aparición</th>
+                        <th>Impacto</th>
+                        <th>Descripción</th>
+                        <th>Acciones Preventivas</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--
+                    <tr>
+                        <td>Ciberataques</td>
+                        <td>1</td>
+                        <td>5</td>
+                        <td>Hackeos, malware, ransomware, phishing y otros ataques que buscan comprometer la seguridad de la información.</td>
+                        <td>Implementar sistemas de seguridad robustos y Realizar capacitaciones</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>Robo de datos</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>Pérdida o filtración de información sensible como datos de clientes, secretos comerciales o información financiera.</td>
+                        <td>Utilizar encriptación para proteger datos sensibles y Limitar el acceso a información</td>
+                        <td>12</td>
+                    </tr>
+                    <tr>
+                        <td>Fraude</td>
+                        <td >1</td>
+                        <td>5</td>
+                        <td>Actividades fraudulentas internas o externas que buscan obtener ganancias ilícitas o perjudicar a la empresa</td>
+                        <td>Establecer políticas de control interno y auditorías regulares</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>Descontento laboral</td>
+                        <td>1</td>
+                        <td>3</td>
+                        <td>Huelgas, protestas o insatisfacción del personal que afecte la productividad y el clima organizacional.</td>
+                        <td>Realizar encuestas de satisfacción laboral y actuar sobre los resultados</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>Desastres naturales</td>
+                        <td>1</td>
+                        <td>4</td>
+                        <td>Inundaciones, terremotos, incendios u otros desastres que pueden dañar las instalaciones o interrumpir las operaciones.</td>
+                        <td>Realizar simulacros de evacuación y emergencia</td>
+                        <td>4</td>
+                    </tr> 
+                    -->
+                    
+                  
+                </tbody>
+            </table>
+        </div>
+       
+    </div>
+    <div class="botonAnalisis">
+        <div class="cont-boton">
+            <button class="button"  onclick="generarPareto()">Ver Análisis</button>
+           
+        </div>
+        
+    </div>
+    
+    <div class="analisis" id="ResAnalisis">
+        <canvas id="paretoChart" width="400" height="200"></canvas>
+
+       </div>
+    <script src="../script/ModeloAmenazas.js"></script>
+</body>
+
+</html>
