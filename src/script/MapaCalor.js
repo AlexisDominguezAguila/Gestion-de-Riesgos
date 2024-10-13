@@ -1,15 +1,53 @@
+//ventana modal 
+function abrir(){
+    document.getElementById("vent").className = "ventanaAbierta";
+}
+
+function cerrar(){
+
+    document.getElementById("vent").className = "ventana";
+}
+  // grafico de calor 
+
 const ctx = document.getElementById('riskBubbleChart').getContext('2d');
         
-// Arreglo para almacenar los riesgos
-const risks = [];
+const risks = [
+   /*  
+    { riesgo: 'Retraso en la entrega de suministros', aparicion: 4, impacto: 5, estado: 20 },
+    { riesgo: 'Falta de recursos humanos', aparicion: 3, impacto: 4, estado: 12 },
+    { riesgo: 'Cambio en regulaciones gubernamentales', aparicion: 2, impacto: 5, estado: 10 },
+    { riesgo: 'Problemas tecnológicos (fallos en el sistema)', aparicion: 5, impacto: 3, estado: 15 },
+    { riesgo: 'Accidentes laborales', aparicion: 1, impacto: 4, estado: 4 },
+    { riesgo: 'Reputación dañada por malas críticas', aparicion: 3, impacto: 2, estado: 6 },
+    { riesgo: 'Incremento en costos de producción', aparicion: 4, impacto: 4, estado: 16 },
+    { riesgo: 'Desastres naturales (inundaciones, terremotos)', aparicion: 2, impacto: 5, estado: 10 },
+    { riesgo: 'Fugas de información y ciberataques', aparicion: 5, impacto: 5, estado: 25 },
+    { riesgo: 'Desacuerdos con proveedores', aparicion: 3, impacto: 3, estado: 9 },
+    { riesgo: 'Dependencia de un solo cliente', aparicion: 4, impacto: 4, estado: 16 },
+    { riesgo: 'Fluctuaciones del mercado', aparicion: 5, impacto: 3, estado: 15 },
+    { riesgo: 'Inestabilidad política en la región', aparicion: 2, impacto: 5, estado: 10 },
+    { riesgo: 'Cambio en tendencias del consumidor', aparicion: 3, impacto: 4, estado: 12 },
+    { riesgo: 'Dificultades en la logística de distribución', aparicion: 3, impacto: 3, estado: 9 },
+    { riesgo: 'Incremento en competencia', aparicion: 4, impacto: 4, estado: 16 },
+    { riesgo: 'Problemas de calidad en el producto', aparicion: 5, impacto: 5, estado: 25 },
+    { riesgo: 'Inadecuada gestión de proyectos', aparicion: 4, impacto: 4, estado: 16 },
+    { riesgo: 'Inadecuada gestión de actividades', aparicion: 4, impacto: 4, estado: 16 },
+    { riesgo: 'Inadecuada gestión de servicios', aparicion: 4, impacto: 4, estado: 16 },
+    { riesgo: 'Costos imprevistos en la ejecución del proyecto', aparicion: 3, impacto: 4, estado: 12 },
+    { riesgo: 'Cambio en el equipo directivo', aparicion: 2, impacto: 3, estado: 6 },
+    { riesgo: 'Dificultades en la comunicación interna', aparicion: 3, impacto: 3, estado: 9 },
+    { riesgo: 'Problemas de imagen corporativa', aparicion: 2, impacto: 4, estado: 8 }*/
+];
 
-// Crear el gráfico inicial
+
+
+
 const riskBubbleChart = new Chart(ctx, {
     type: 'bubble',
     data: {
         datasets: [{
             label: 'Riesgos',
-            data: [], // Inicialmente vacío
+            data: [], 
             backgroundColor: 'rgba(54, 162, 235, 0.5)',
             borderWidth: 0,
             borderColor: 'black',
@@ -22,15 +60,24 @@ const riskBubbleChart = new Chart(ctx, {
                 max: 6,
                 title: {
                     display: true,
-                    text: 'Impacto'
+                    text: 'Impacto',
+                    color: 'black'
+                },
+                ticks: {
+                    color: 'black' 
                 }
             },
+            
             y: {
                 beginAtZero: true,
                 max: 6,
                 title: {
                     display: true,
-                    text: 'Aparicion'
+                    text: 'Aparicion',
+                    color: 'black'
+                },
+                ticks: {
+                    color: 'black' 
                 }
             }
         },
@@ -41,7 +88,9 @@ const riskBubbleChart = new Chart(ctx, {
                         const value = context.raw;
                         return `Aparicion: ${value.y}, Impacto: ${value.x}, Cantidad: ${value.count}`;
                     }
-                }
+                },
+                titleColor: 'white', 
+                bodyColor: 'white'
             }
         },
         onClick: function(event) {
@@ -65,13 +114,65 @@ const riskBubbleChart = new Chart(ctx, {
     }
 });
 
+
+function updateChart() {
+    // Agrupar los puntos por sus coordenadas 
+    const groupedData = {};
+    risks.forEach((risk) => {
+        const key = `${risk.impacto},${risk.aparicion}`;  
+        if (!groupedData[key]) {
+            groupedData[key] = { 
+                x: risk.impacto, 
+                y: risk.aparicion, 
+                r: 5, 
+                count: 1, 
+                names: risk.riesgo 
+            }; 
+        } else {
+            groupedData[key].r += 5; 
+            groupedData[key].count += 1; 
+            groupedData[key].names += `\n${risk.riesgo}`; 
+        }
+    });
+
+    // Convertir los datos agrupados en un arreglo 
+    const processedData = Object.values(groupedData).map((data) => {
+
+        let color;
+        if (data.count < 3) {
+            color = 'green';  
+        } else if (data.count < 6) {
+            color = 'yellow'; 
+        } else if (data.count < 8) {
+            color = 'orange'; 
+        } else {
+            color = 'red';    
+        }
+
+        return {
+            ...data, 
+            backgroundColor: color 
+        };
+    });
+
+    // Actualizar los datos del gráfico de burbujas
+    riskBubbleChart.data.datasets[0].data = processedData;
+    riskBubbleChart.data.datasets[0].backgroundColor = processedData.map(data => data.backgroundColor);
+    riskBubbleChart.update();
+
+    // Actualizar el gráfico circular
+    const totalRiesgos = risks.length;
+    const totalGrupos = Object.keys(groupedData).length;
+
+    riskPieChart.data.datasets[0].data = [totalRiesgos, totalGrupos];
+    riskPieChart.update();
+}
 document.querySelector('button').addEventListener('click', function () {
     // Obtener los valores del formulario
     const riesgo = document.getElementById('riesgo').value;
     const aparicion = parseInt(document.getElementById('aparicion').value);
     const impacto = parseInt(document.getElementById('impacto').value);
-    
-    // Calcular el estado (producto de aparición por impacto)
+
     const estado = aparicion * impacto;
 
     // Verificar si el riesgo está vacío
@@ -103,26 +204,5 @@ document.querySelector('button').addEventListener('click', function () {
 
     // Actualizar el gráfico
     updateChart();
+    cerrar();
 });
-
-function updateChart() {
-    // Agrupar los puntos por sus coordenadas (x, y) y ajustar el radio
-    const groupedData = {};
-    risks.forEach((risk) => {
-        const key = `${risk.impacto},${risk.aparicion}`;  
-        if (!groupedData[key]) {
-            groupedData[key] = { x: risk.impacto, y: risk.aparicion, r: 5, count: 1, names: risk.riesgo }; 
-        } else {
-            groupedData[key].r += 5; 
-            groupedData[key].count += 1; 
-            groupedData[key].names += `\n${risk.riesgo}`; 
-        }
-    });
-
-    // Convertir los datos agrupados en un arreglo para el gráfico
-    const processedData = Object.values(groupedData);
-
-    // Actualizar los datos del gráfico
-    riskBubbleChart.data.datasets[0].data = processedData;
-    riskBubbleChart.update();
-}

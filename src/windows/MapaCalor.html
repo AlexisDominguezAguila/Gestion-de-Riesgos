@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,54 +9,98 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.0"></script>
     <title>Mapa de Calor</title>
 </head>
-<body>
-    <h1>Mapa de calor</h1>
-    <div class="form">
-        <form action="">
-            <label for="riesgo">Riesgo</label>
-            <input type="text" id="riesgo">
-            <label for="aparicion">Nivel de aparicion</label>
-            <select id="aparicion">
-                <option value="1">Muy bajo</option>
-                <option value="2">Bajo</option>
-                <option value="3">Medio</option>
-                <option value="4">Alto</option>
-                <option value="5">Muy Alto</option>
-            </select>
-            <label for="impacto"> Nivel de impacto</label>
-            <select id="impacto">
-                <option value="1">Muy bajo</option>
-                <option value="2">Bajo</option>
-                <option value="3">Medio</option>
-                <option value="4">Alto</option>
-                <option value="5">Muy Alto</option>
-            </select>
-        </form>
-        <button>Añadir</button>
-    </div>
-    <div class="table">
-        <table>
-            <thead>
-                <tr>
-                    <th>Riesgo</th>
-                    <th>Aparición</th>
-                    <th>Impacto</th>
-                    <th>Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Aquí aparecerá los riesgos agregados -->
-            </tbody>
-        </table>
-    </div>
-    <div class="cont-grafico">
-        <canvas id="riskBubbleChart" width="600" height="400"></canvas>
-    </div>
-    <div class="informacion">
-        <!-- Aquí aparecerá la información de cada punto del grafico -->
-    </div>
 
+<body>
+    <div class="ventana" id="vent">
+        <div class="modal" id="Formodal">
+            <div class="form">
+                <h2>Mapa de calor</h2>
+                <div class="campos">
+                    <label for="riesgo">Riesgo</label>
+                    <input type="text" id="riesgo" autocomplete="off">
+                </div>
+                <div class="cont-campos">
+                    <div class="campos" id="cont-sel">
+                        <label for="aparicion">Nivel de aparicion</label>
+                        <select id="aparicion">
+                            <option value="1">Muy bajo</option>
+                            <option value="2">Bajo</option>
+                            <option value="3">Medio</option>
+                            <option value="4">Alto</option>
+                            <option value="5">Muy Alto</option>
+                        </select>
+                    </div>
+                    <div class="campos" id="cont-sel">
+                        <label for="impacto"> Nivel de impacto</label>
+                        <select id="impacto">
+                            <option value="1">Muy bajo</option>
+                            <option value="2">Bajo</option>
+                            <option value="3">Medio</option>
+                            <option value="4">Alto</option>
+                            <option value="5">Muy Alto</option>
+                        </select>
+                    </div>
+               
+                    
+                </div>
+                <div class="botones">
+                    <button class="btn-aceptar" onclick="cerrar()">Aceptar</button>
+                    <button class="btn-cancelar" onclick="cerrar()">Cerrar</button>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+     
+
+    <div class="titulo">
+        <h1>Mapa de calor de riesgos</h1>
+    </div>
+    <div class="botonNuevo">
+        <button class="button" onclick="abrir()">Nueva Amenaza</button>
+    </div>
+    
+    <div class="cont-grafic-info">
+        <div class="cont-grafico">
+            <canvas id="riskBubbleChart"  ></canvas>
+        </div>
+        <div class="cont-info">
+            <div class="titulo-info">
+                <p>Información de Riesgos</p>
+
+            </div>
+            <div class="informacion">
+                <div class="span">
+                    <span>Selecciona un punto del grafico para ver su información</span>
+                </div>
+                
+                <!-- Aquí aparecerá la información de cada punto del grafico -->
+            </div>
+        </div>
+       
+    </div>
+     
+    <div class="cont-table">
+        <div class="table">
+            <table id="tablaAmenazas">
+                <thead>
+                    <tr>
+                        <th>Riesgo</th>
+                        <th>Aparición</th>
+                        <th>Impacto</th>
+                        <th>Valor del Riesgo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <!-- Aquí aparecerá los riesgos agregados -->
+                </tbody>
+            </table>
+        </div>
+    </div>
     <script src="../script/MapaCalor.js"></script>
- 
+
 </body>
+
 </html>

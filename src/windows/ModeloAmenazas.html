@@ -31,7 +31,7 @@
                             <option value="5">Muy Alto</option>
                         </select>
                     </div>
-                    
+
                     <div class="campos">
                         <label for="impacto">Probabilidad de Impacto</label>
                         <select id="impacto">
@@ -43,31 +43,31 @@
                         </select>
                     </div>
                 </div>
-                
-                
+
+
                 <div class="campos">
                     <label for="descripcion">Descripción de Amenaza</label>
                     <input type="text" id="descripcion" placeholder="Describe la amenaza">
                 </div>
-                
+
                 <div class="campos">
                     <label for="acciones">Acciones preventivas</label>
                     <input type="text" id="acciones" placeholder="Acciones preventivas">
                 </div>
-                
+
                 <div class="botones">
                     <button class="btn-aceptar" onclick="nuevoRiesgo()">Aceptar</button>
                     <button class="btn-cancelar" onclick="cerrar()">Cancelar</button>
                 </div>
             </div>
-            
-              </div>
+
+        </div>
 
     </div>
     <div class="inicio">
         <a href="../../index.html">Inicio</a>
     </div>
-    
+
     <div class="titulo">
         <h1>Modelado de Amenazas</h1>
     </div>
@@ -131,25 +131,25 @@
                         <td>4</td>
                     </tr> 
                     -->
-                    
-                  
+
+
                 </tbody>
             </table>
         </div>
-       
+
     </div>
     <div class="botonAnalisis">
         <div class="cont-boton">
-            <button class="button"  onclick="generarPareto()">Ver Análisis</button>
-           
+            <button class="button" onclick="generarPareto()">Ver Análisis</button>
+
         </div>
-        
+
     </div>
-    
+
     <div class="analisis" id="ResAnalisis">
         <canvas id="paretoChart" width="400" height="200"></canvas>
 
-       </div>
+    </div>
     <script src="../script/ModeloAmenazas.js"></script>
 </body>
 

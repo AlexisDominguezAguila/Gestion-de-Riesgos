@@ -1,17 +1,382 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
 }
-.cont-grafico{
-    display: block;
-    width: 800px;
-    height: 100vh;
-    padding: 20px;
+
+:root {
+    --fondo: #000000;
+    --fondoCanva: #c7c7c7;
+    --fondoTabla:#4d4d4d;
+    --text: #fff;
+    
+    --colorButton: #450961;
+    --ButonHover: #570b3a;
+    --fondoVentana: #ffffff;
+    --textVentana: #000000;
+    --ButtonAceptar: #417741;
+
+
 }
-.cont-grafico canvas{
-    height: auto;
+
+body {
+    background-color: var(--fondo);
+}
+
+.inicio {
+    width: 100px;
+    background-color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    z-index: 1000; 
+}
+.inicio a{
+    padding: 10px ;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/*estilos para la ventabna modal*/
+
+.ventana {
+    display: none;
+    position: absolute;
+}
+
+.ventanaAbierta {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    color: var(--textVentana);
+    display: flex;
+    position: absolute;
     width: 100%;
-     
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    background-color: var(--fondoVentana);
+    z-index: 10000;
+    width: auto;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+
+}
+
+
+#cerrar {
+    position: absolute;
+    right: 3px;
+    top: 1px;
+
+}
+
+.buttonAceptar {
+    background-color: var(--ButtonAceptar);
+    border: 2px solid var(--ButtonAceptar);
+    padding: 10px 20px;
+    border-radius: 6px;
+    color: var(--textVentana);
+    transform: 0.5s ease-out;
+    cursor: pointer;
+}
+
+.buttonCancelar {
+    background-color: #fff;
+    border: 2px solid var(--colorButton);
+    padding: 10px 20px;
+    border-radius: 6px;
+    color: var(--textVentana);
+    transform: 0.5s ease-out;
+    cursor: pointer;
+}
+
+/*formulario de la ventana modal*/
+
+.form {
+    
+    width: 400px;
+    padding: 20px;
+    margin: 0 auto;
+
+}
+
+h2 {
+    text-align: center;
+    color: var(--textVentana);
+    margin-bottom: 20px;
+    font-size: 24px;
+    border-bottom: 1px solid #000000;
+}
+
+.cont-campos {
+    width: 100%;
+    display: flex;
+    gap: 2em;
+}
+
+.campos {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.cont-campos #cont-sel{
+    width: 50%;
+}
+.campos label {
+    font-size: 14px;
+    color: #2c2c2c;
+    margin-bottom: 5px;
+}
+
+.campos input[type="text"],
+.campos select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+.campos input[type="text"]:focus,
+.campos select:focus {
+    border-color: #007bff;
+}
+
+.botones {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+
+.botones .btn-aceptar,
+.botones .btn-cancelar {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.botones .btn-aceptar {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.botones .btn-cancelar {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.botones .btn-aceptar:hover {
+    background-color: #218838;
+}
+
+.botones .btn-cancelar:hover {
+    background-color: #c82333;
+}
+
+/*estilos para el contenido del titulo y boton anañdir*/
+
+.inicio {
+    position: relative;
+    display: flex;
+    width: 100px;
+    height: 40px;
+    gap: 1em;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.inicio a img {
+    height: 100%;
+    text-decoration: none;
+    align-items: center;
+}
+
+.titulo {
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo h1 {
+    color: var(--text);
+}
+
+.botonNuevo {
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.button {
+    min-width: 130px;
+    height: 40px;
+    color: rgb(255, 255, 255);
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+    outline: none;
+    border-radius: 5px;
+    border: none;
+    background: #343a40;
+    box-shadow: 0 5px #212529;
+}
+
+.button:hover {
+    box-shadow: 0 3px #212529;
+    top: 1px;
+}
+
+.button:active {
+    box-shadow: 0 0 #212529;
+    top: 5px;
+}
+
+/*estilos para el contenedor del grafico*/
+.cont-grafic-info{
+    width: 100%;
+    display: flex;
+ 
+    padding: 10px;
+}
+.cont-grafico {
+    width: 70%;
+}
+.cont-grafico canvas {
+    border-radius: 6px;
+    background-color: var(--fondoCanva);
+}
+
+.cont-info{
+    width: 30%;
+    border-radius: 6px;
+    margin-left: 10px;
+    display: block;
+    
+}
+.titulo-info{
+    width: 100%;
+    background-color: #202020;
+    color: var(--text);
+    height: 10%;
+    font-weight: lighter;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 6px 6px 0 0;
+
+ }
+
+.informacion{
+    background-color: #0f0f0f;
+    width: 100%;
+    height: 415px;
+    max-height: 420px;
+    padding: 20px;
+    border-radius: 0 0 6px 6px;
+    overflow-y: scroll;
+}
+.span{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.span span{
+    font-size: 20px;
+    color: #cfcfcf;
+    font-style: italic;
+    text-align: center;
+    font-weight: lighter;
+}
+.informacion ul {
+    padding: 10px;
+}
+.informacion ul li{
+    color: white;
+    padding: 5px;
+ 
+}
+/*estilos para la tabla de riesgos*/
+/* tabla de amenazas */
+.cont-table {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.table {
+    width: 75%;
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+
+#tablaAmenazas {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    
+}
+
+#tablaAmenazas th,
+#tablaAmenazas td {
+    padding: 12px 10px;
+    text-align: center;
+    font-size: 14px;
+}
+ 
+#tablaAmenazas thead th {
+    background-color: #0f0f0f;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-bottom: 2px solid #101411;
+}
+
+#tablaAmenazas tbody tr {
+    background-color: var(--fondoTabla);
+    transition: background-color 0.3s ease;
+   
+}
+
+
+#tablaAmenazas tbody tr:nth-child(even) {
+    background-color: #252525;
+}
+
+
+#tablaAmenazas tbody tr:hover {
+    background-color: #111111;
+}
+
+
+#tablaAmenazas td {
+    border-bottom: 1px solid #ddd;
+    color: var(--text);
+    width: auto;
 }
