@@ -4,10 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/MapaCalor.css">
-    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.0"></script>
+    <title>Mapa de Calor</title>
 </head>
 <body>
     <h1>Mapa de calor</h1>
+    <div class="form">
+        <form action="">
+            <label for="riesgo">Riesgo</label>
+            <input type="text" id="riesgo">
+            <label for="aparicion">Nivel de aparicion</label>
+            <select id="aparicion">
+                <option value="1">Muy bajo</option>
+                <option value="2">Bajo</option>
+                <option value="3">Medio</option>
+                <option value="4">Alto</option>
+                <option value="5">Muy Alto</option>
+            </select>
+            <label for="impacto"> Nivel de impacto</label>
+            <select id="impacto">
+                <option value="1">Muy bajo</option>
+                <option value="2">Bajo</option>
+                <option value="3">Medio</option>
+                <option value="4">Alto</option>
+                <option value="5">Muy Alto</option>
+            </select>
+        </form>
+        <button>Añadir</button>
+    </div>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Riesgo</th>
+                    <th>Aparición</th>
+                    <th>Impacto</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí aparecerá los riesgos agregados -->
+            </tbody>
+        </table>
+    </div>
+    <div class="cont-grafico">
+        <canvas id="riskBubbleChart" width="600" height="400"></canvas>
+    </div>
+    <div class="informacion">
+        <!-- Aquí aparecerá la información de cada punto del grafico -->
+    </div>
+
     <script src="../script/MapaCalor.js"></script>
+ 
 </body>
 </html>
